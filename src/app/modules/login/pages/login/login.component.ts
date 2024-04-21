@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AutenticacionService } from 'src/app/shared/servicios/autenticacion.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
   public myForm!: FormGroup;
 
   constructor(private fb:FormBuilder,
-              private loginPrd:AutenticacionService
+              private loginPrd:AutenticacionService,
+              private routerprd:Router
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
     if(!this.loginPrd.ingresarAplicativo(this.myForm.value)){
       alert("Usuario o contraseña invalida.")
     }else{
-      alert("Usuario o contraseña correctas.")
+      this.routerprd.navigateByUrl("/sesion/principal");
     }
   }
 

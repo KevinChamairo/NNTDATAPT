@@ -11,7 +11,4 @@ export class AppComponent {
   constructor(private loginPrd:AutenticacionService){
 
   }
-  public visualizarMenu(){
-    return this.loginPrd.habilitarlogeo();
-  }
 }
