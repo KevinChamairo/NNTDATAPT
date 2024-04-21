@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AutenticacionService } from './shared/servicios/autenticacion.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'NttDataPruebaTecnica';
+  constructor(private loginPrd:AutenticacionService){
+
+  }
+  public visualizarMenu(){
+    return this.loginPrd.habilitarlogeo();
+  }
 }
