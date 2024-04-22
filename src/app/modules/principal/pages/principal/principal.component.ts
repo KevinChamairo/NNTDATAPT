@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutenticacionService } from 'src/app/shared/servicios/autenticacion.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-principal',
@@ -26,6 +27,11 @@ export class PrincipalComponent implements OnInit {
 
   Agregar() {
     if(this.tareas.invalid){
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Tarea sin descripción.',
+      });
       Object.values(this.tareas.controls).forEach(
         control => {control.markAllAsTouched();
       })
@@ -34,8 +40,8 @@ export class PrincipalComponent implements OnInit {
       this.taskGrup.push(this.tareas.value);
       this.tareas.reset();
     }
-
   }
+
   onChangeStatus(val: any) {
     this.taskGrup[val].checked = !this.taskGrup[val].checked;
   }

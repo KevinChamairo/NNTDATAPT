@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutenticacionService } from 'src/app/shared/servicios/autenticacion.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -36,11 +37,14 @@ export class LoginComponent implements OnInit {
       return;
     }
     if(!this.loginPrd.ingresarAplicativo(this.myForm.value)){
-      alert("Usuario o contraseña invalida.")
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Usuario o contraseña inválida.',
+    });
     }else{
       sessionStorage.setItem('userData', JSON.stringify(this.myForm.value));
       this.routerprd.navigateByUrl("/sesion/principal");
-      console.log(this.myForm.value);
     }
   }
 
