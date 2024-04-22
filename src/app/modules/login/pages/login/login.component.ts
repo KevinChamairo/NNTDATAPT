@@ -38,7 +38,9 @@ export class LoginComponent implements OnInit {
     if(!this.loginPrd.ingresarAplicativo(this.myForm.value)){
       alert("Usuario o contraseña invalida.")
     }else{
+      sessionStorage.setItem('userData', JSON.stringify(this.myForm.value));
       this.routerprd.navigateByUrl("/sesion/principal");
+      console.log(this.myForm.value);
     }
   }
 

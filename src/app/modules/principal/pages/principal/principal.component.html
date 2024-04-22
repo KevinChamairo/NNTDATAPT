@@ -1,8 +1,53 @@
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+<hr>
+<h3>LISTA DE TAREAS</h3>
+<div class="limiter">
+  <div class="container-login100">
+      <div class="wrap-login100 p-t-50 p-b-90">
+        <form class="login100-form validate-form flex-sb flex-w" [formGroup]="tareas">
+            <div class="col-12 col-sm-8 col-lg-6">
+                <div class="form-group">
+                    <h6 for="documento">Descripción</h6>
+                    <div class="input-group">
+                        <input type="text" id="documento" class="form-control form-control-sm" formControlName="descripcion" [class.is-invalid]="f.descripcion.errors && f.descripcion.touched" (keyup.enter)="Agregar()" />
+                        <div class="input-group-append">
+                            <div class="btn-container">
+                                <button class="login100-form-btn" type="button" (click)="Agregar()">
+                                    Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+      <div class="table-responsive mb-2">
+          <table class="table table-striped">
+              <tbody>
+                  <ng-container *ngFor="let taskGrupItem of taskGrup; let i =index;">
+                      <tr class="strip">
+                          <td>
+                              <div class="fancy-checkbox">
+                                  <label (click)="onChangeStatus(i)">
+                                      <input [id]='"item-"+taskGrupItem' name='checkboxData' type="checkbox"
+                                          [checked]="taskGrupItem.checked">
+                                  </label>
+                              </div>
+                          </td>
+                          <td>{{taskGrupItem.descripcion}}</td>
+                          <td>
+                              <ng-container *ngIf="!taskGrupItem.checked">
+                                <button class="btn btn-danger btn-sm" (click)="eliminarTarea(i)">Eliminar</button>
+                              </ng-container>
+                          </td>
+
+                      </tr>
+                  </ng-container>
+              </tbody>
+          </table>
+      </div>
   </div>
 </div>
+
+<button (click)="cerrarSesion()" type="button" class="btn btn-outline-primary">Cerrar Sesión</button>

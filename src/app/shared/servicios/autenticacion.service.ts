@@ -15,4 +15,11 @@ export class AutenticacionService {
   public habilitarlogeo(){
     return this.ingresar;
   }
+
+  getAutenticationBySession(){
+    return sessionStorage.getItem("userData")
+  }
+  public limpiarDataBySession(){
+    return sessionStorage.setItem("userData", '');
+  }
 }
